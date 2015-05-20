@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset = "UTF-8"/>
+
+<style type="text/css">
+ body{
+  background-image:url("image.jpg");
+  background-color:#B8DBFF;
+  background-repeat: no-repeat; 
+ }
+div{
+border: 15px solid rgb(153, 102, 0);
+background: rgba(255, 255, 255, 0.6);
+background-position: 30px 10px;
+width: 400px;
+height: 100px;
+box-shadow: 4px 4px 10px 2px black;
+border-radius: 2em;
+text-align:center;
+}
+
+</style>
+
+<title>Minha 1st página</title>
+</head>
+
+<div>
+<p>O gato (Felis silvestris catus), também conhecido como gato caseiro, gato urbano ou gato doméstico, é um animal da Família dos felídeos, muito popular como animal de estimação
+</p>
+</div>
+<body>
+
+</body>
+</html>
