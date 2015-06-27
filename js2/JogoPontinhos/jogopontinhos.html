@@ -1,0 +1,166 @@
+<table>
+    <head>
+    
+    </head>
+    <body>
+        <script>
+var tam=11;
+var pontos=[0,0];
+var jogador=1;
+var pos=[];
+
+n0 = new Image(); n0.src="bege.gif";
+n1 = new Image(); n1.src="green.gif";
+n2 = new Image(); n2.src="purple.gif";
+
+joga= new Image();
+
+function inicializar() {
+    jogador=1;
+    pontos=[0,0];
+    for (i=0;i<tam;i++){ pos[i]=[];for (j=0;j<tam;j++) pos[i][j]=0;}
+}
+
+inicializar();
+
+document.write('<table border="0" cellpadding="0" cellspacing="0">');
+
+function pontuar(){
+    if(jogador==1){pontos[0]+=1;}
+    else{pontos[1]+=1;}
+        
+    if (pontos[0]+pontos[1]==25) {
+        if (pontos[0]>pontos[1]) {
+            alert("Jogador Roxo ganhou! "+pontos[0]+"x"+pontos[1]);
+        }else{
+             alert("Jogador Verde ganhou! "+pontos[1]+"x"+pontos[0]);
+        }
+    }
+}
+
+
+for (i=0; i<tam; i++) {
+    document.write('<tr align=center>');
+    for(j=0; j<tam; j++){
+        if (i%2==0) {
+            if (j%2==0) {
+                document.write('<td align=center><img src="black.gif" border=0 height=8px width= 8px></td>');
+            }else{
+                document.write('<td align=center><img id="'+i+'x'+j+'" onclick="clicar('+i+','+j+')" src="bege.gif" border=0 height=8px width= 30px ></td>');
+            }
+        }else{
+            if (j%2==0) {
+                document.write('<td align=center><img id="'+i+'x'+j+'" onclick="clicar('+i+','+j+')" src="bege.gif" border=0 height=30px width= 8px></td>');
+            }else{
+                document.write('<td align=center><img id="'+i+'x'+j+'" src="bege.gif" border=0 height=30x width= 30px></td>');
+            }            
+        }
+    }
+    document.write('</tr>');
+}
+    document.write('</table><hr>');
+    
+    document.write('<pre><p id="texto">Jogador  <p><img id="jogador" src="purple.gif" height=10x width= 50px><pre>');
+ 
+
+ 
+function checarPonto(x,y){
+    if (y>=0 && x>=0 && y<tam  && x<tam && pos[x][y]==1) return 1;
+    else return 0;
+}
+
+function clicar(x, y) {
+    var id=x+'x'+y;
+    var prox=0;
+    if (pos[x][y]<1) {
+       
+        document.getElementById(id).src="bege2.gif";
+        //se o x for par trabalha na horizontal(l,r) senão trabalha com a vertical(t,b
+        if (x%2==0) {
+            //abaixo
+            if((checarPonto(x+2,y)+checarPonto(x+1,y+1)+checarPonto(x+1, y-1))==3){
+                id=(x+1)+'x'+y;
+                
+                if (jogador==1) {
+                    document.getElementById(id).src=n2.src;
+                    pontuar();
+                }
+                else{
+                    document.getElementById(id).src=n1.src;
+                    pontuar();
+                }
+                prox=1;
+            } 
+            
+            //acima
+            if((checarPonto(x-2,y)+checarPonto(x-1,y+1)+checarPonto(x-1,y-1))==3){
+                id=(x-1)+'x'+y;
+                
+                if (jogador==1) {
+                    document.getElementById(id).src=n2.src;
+                    pontuar();
+                    }
+                else{
+                    document.getElementById(id).src=n1.src;
+                    pontuar();
+                }
+                
+                prox=1;
+            }
+        }else{
+            //esquerda
+            if((checarPonto(x,y-2)+checarPonto(x-1,y-1)+checarPonto(x+1,y-1))==3){
+                id=x+'x'+(y-1);
+                
+                if (jogador==1) {
+                    document.getElementById(id).src=n2.src;
+                    pontuar();
+                }
+                else{
+                    document.getElementById(id).src=n1.src;
+                    pontuar();
+                }
+                
+                prox=1;
+            }
+            
+            //direita
+            if((checarPonto(x,y+2)+checarPonto(x-1,y+1)+checarPonto(x+1,y+1))==3){
+                id=x+'x'+(y+1);
+                
+                if (jogador==1) {
+                    document.getElementById(id).src=n2.src;
+                    pontuar();
+                }
+                else{
+                    document.getElementById(id).src=n1.src;
+                    pontuar();
+                }
+                
+                prox=1;
+            }
+        }
+        
+        pos[x][y]=1;
+        
+        if (prox!=1) {
+            if (jogador==1){
+                
+                document.getElementById("jogador").src=n2.src;
+                jogador=2;
+                }
+            else{
+                document.getElementById("jogador").src=n1.src;
+                jogador=1;
+            }
+        }
+       
+    }
+    
+   
+}
+        </script>
+
+   
+    </body>
+</table>
