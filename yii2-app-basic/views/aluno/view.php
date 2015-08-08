@@ -6,9 +6,12 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Aluno */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Alunos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
+
 ?>
 <div class="aluno-view">
 
@@ -28,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+
             'matricula',
             'nome',
             'sexo',
@@ -39,3 +42,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<p>Em nossa base, existem <?=$numAno?> alunos de <?= $model->ano_ingresso?>. </p>

@@ -18,6 +18,8 @@ use Yii;
  */
 class Aluno extends \yii\db\ActiveRecord
 {
+
+
     /**
      * @inheritdoc
      */
@@ -32,9 +34,9 @@ class Aluno extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['matricula', 'id_curso', 'ano_ingresso'], 'integer'],
+            [['matricula', 'id_curso', 'ano_ingresso'], 'integer', 'message'=>'Apenas valores inteiros.'],
+            [['matricula', 'id_curso', 'ano_ingresso','sexo','nome'], 'required', 'message'=>'Campo obrigatorio!'],
             [['nome'], 'string', 'max' => 200],
-            [['sexo'], 'string', 'max' => 1]
         ];
     }
 
@@ -44,12 +46,12 @@ class Aluno extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            //'id' => 'ID',
             'matricula' => 'Matricula',
-            'nome' => 'Nome',
+            'nome' => 'Nome do Aluno',
             'sexo' => 'Sexo',
-            'id_curso' => 'Id Curso',
-            'ano_ingresso' => 'Ano Ingresso',
+            'id_curso' => 'Curso de Graduação',
+            'ano_ingresso' => 'Ano deIngresso',
         ];
     }
 
@@ -59,6 +61,10 @@ class Aluno extends \yii\db\ActiveRecord
     public function getIdCurso()
     {
         return $this->hasOne(Curso::className(), ['id' => 'id_curso']);
+    }
+
+    public function afterFind(){
+
     }
 
 }

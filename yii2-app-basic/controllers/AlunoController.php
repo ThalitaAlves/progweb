@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Curso;
 use Yii;
 use app\models\Aluno;
 use app\models\AlunoSearch;
@@ -48,9 +49,10 @@ class AlunoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        
+        $ano= Aluno::findOne($id)->ano_ingresso;
+        $numAno = Aluno::find()->where('ano_ingresso='.$ano)->count();
+        return $this->render('view', ['model' => $this->findModel($id), 'numAno'=>$numAno]);
     }
 
     /**
